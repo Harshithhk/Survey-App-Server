@@ -20,8 +20,7 @@ const login = async(req,res) => {
             token: generateToken(user._id),
         })
     } else {
-        res.status(401)
-        throw new Error('Invalid name or password')
+        res.status(401).send('Invalid Credentials')
     }
 }
 
@@ -32,11 +31,11 @@ const login = async(req,res) => {
 const register =async(req,res) => {
     const {name,password} = req.body
     
-    const userExists = await User.findOne({flatNo:flatNo})
+    const userExists = await User.findOne({name:name})
 
     if(!userExists){
 
-        const user = await User.create({name,password,wing,flatNo,phoneNo,isRental,ownerId,avatar})
+        const user = await User.create({name,password})
 
         if(user){
              delete user['password']
@@ -47,10 +46,10 @@ const register =async(req,res) => {
                 token: generateToken(user._id),    
             })
         }else{
-            res.status(400).json('Invalid user data')
+            res.status(400).send('Invalid user data')
         }
     }else{
-        res.status(400).json('UserExists')
+        res.status(400).send('UserExists')
     }
 }
 
@@ -61,14 +60,9 @@ const register =async(req,res) => {
 // @access   Private
 const getUserProfile =async(req,res)=>{
     
-   const user = await User.findById(req.user._id)
-
-   if(user){
-    res.json({
-        _id: user._id,
-        name: user.name,
-        role: user.role,
-    })
+//    const user = await User.findById(req.user._id).select('-password')
+   if(req.user){
+    res.json(req.user)
    }else{
        res.status(404)
        throw new Error('User not found')
@@ -108,6 +102,7 @@ const updateUserProfile = async(req,res) => {
        throw new Error('User not found')
    }
 }
+
 
 
 export{login,register,getUserProfile,updateUserProfile}
