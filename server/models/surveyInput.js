@@ -7,7 +7,7 @@ const surveySchema = mongoose.Schema({
     },
     email:{
         type: String,
-        required: true,
+        required: false,
     },
     profession:{
         type: String,
@@ -27,19 +27,19 @@ const surveySchema = mongoose.Schema({
     },
     voterId:{
         type: Boolean,
-        required: true,
+        required: false,
     },
     adharCard:{
         type: Boolean,
-        required: true,
+        required: false,
     },
     rationCard:{
         type: Boolean,
-        required: true,
+        required: false,
     },
     panCard:{
         type: Boolean,
-        required: true,
+        required: false,
     },
     votingCity:{
         type: String,
@@ -59,7 +59,7 @@ const surveySchema = mongoose.Schema({
     },
     scopeOfImprovement:{
         type: [String],
-        required: true,
+        required: false,
     },
     year:{
         type: String,
