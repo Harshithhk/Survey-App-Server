@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import connectDB from './config/db.js'
 
 import userRoutes from './routes/userRoutes.js'
-import surveyRoutes from './routes/surveyRoutes.js'
+import newsAndNoticesRoutes from './routes/newsAndNoticesRoutes.js'
 
 
 dotenv.config()
@@ -24,7 +24,7 @@ app.get("/", (req,res)=>{
 })
 
 app.use('/api/users',userRoutes)
-app.use('/api/survey',surveyRoutes)
+app.use('/api/newsandnotices',newsAndNoticesRoutes)
 
 const PORT = process.env.PORT || 5000
 

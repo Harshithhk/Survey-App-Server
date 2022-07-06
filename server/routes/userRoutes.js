@@ -9,7 +9,7 @@ import {
 } from '../controllers/userController.js'
 import {protect} from '../middlewares/authMiddleware.js'
 
-router.route('/register').post(protect,register)
+router.route('/register').post(register)
 router.post('/login',login)
 router.route('/profile').get(protect,getUserProfile)
 
